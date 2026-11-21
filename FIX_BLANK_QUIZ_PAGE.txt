@@ -1,0 +1,15 @@
+LingoSpark — fix for blank Create Questions page
+
+The blank screen error "Cannot read properties of undefined (reading 'map')" at App.jsx:258 occurs when the new interactive frontend receives old preview-only question data without clickable options.
+
+IMPORTANT: The frontend and backend must both come from this updated project folder. An older backend still running on port 8000 returns a different response format.
+
+1. Keep your PostgreSQL database and existing backend/.env; do not delete or reset either.
+2. Close any previously running Uvicorn backend CMD windows (Ctrl+C).
+3. Open CMD in THIS project's backend folder.
+4. Run: python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+5. Check http://127.0.0.1:8000/health for database connected.
+6. In a separate CMD window, open THIS project's frontend folder and run npm install (only if needed), then npm run dev.
+7. Refresh the frontend and choose AI Question Maker > Create interactive quiz.
+
+This patch also makes the quiz page show a helpful error if an old backend is still being used, instead of crashing to a blank page.
